@@ -4,7 +4,8 @@ import { actions, subscribe, type State } from './store'
 
 // Cloud backup is optional: without these two values (set in .env.local at build time) the app stays phone-only.
 const url = import.meta.env.VITE_SUPABASE_URL as string | undefined
-const key = import.meta.env.VITE_SUPABASE_ANON_KEY as string | undefined
+// Supabase's newer "publishable" key works the same way as the older "anon" key; accept either name.
+const key = (import.meta.env.VITE_SUPABASE_ANON_KEY || import.meta.env.VITE_SUPABASE_PUBLISHABLE_KEY) as string | undefined
 export const cloudEnabled = Boolean(url && key)
 // Email-code sign-in avoids redirect links, which break when Gmail opens them in a different browser.
 const supabase = cloudEnabled ? createClient(url!, key!, { auth: { persistSession: true, detectSessionInUrl: false } }) : null
