@@ -7,13 +7,14 @@ export default defineConfig({
     react(),
     VitePWA({
       registerType: 'autoUpdate',
+      workbox: { cleanupOutdatedCaches: true, skipWaiting: true, clientsClaim: true },
       includeAssets: ['icon.svg'],
       manifest: {
         name: 'Kolekt – who owes you',
         short_name: 'Kolekt',
         description: 'Track credit sales, send polite WhatsApp reminders and get paid.',
-        theme_color: '#0a2463',
-        background_color: '#f6f9ff',
+        theme_color: '#ffffff',
+        background_color: '#ffffff',
         display: 'standalone',
         start_url: '/',
         icons: [

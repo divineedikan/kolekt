@@ -1,44 +1,26 @@
-/* Kolekt brand: clean blue and white. Deep navy for trust, bright blue for action, green only for money received. */
+/* Kolekt: plain and practical. White background, dark text, one blue for links, colour only where it carries meaning. */
 :root {
-  --ink: #0f1a33;
-  --muted: #52607a;
-  --paper: #f6f9ff;
+  --ink: #111827;
+  --muted: #4b5563;
+  --paper: #ffffff;
   --card: #ffffff;
-  --line: #dfe6f3;
-  --brand: #1652d6;
-  --brand-dark: #0a2463;
-  --brand-mid: #1440a8;
-  --accent: #dbe8ff;
-  --accent-soft: #eef4ff;
-  --accent-text: #1652d6;
-  --accent-on-dark: #a9c8ff;
-  --money: #0d7a50;
-  --money-soft: #daf3e6;
-  --wa: #0f7a43;
-  --warn: #8a5300;
-  --bad: #b3261e;
-  --radius: 16px;
-  --shadow: 0 10px 30px rgba(10, 36, 99, 0.08);
+  --line: #e5e7eb;
+  --brand: #1d4ed8;
+  --brand-dark: #111827;
+  --brand-mid: #1f2937;
+  --accent: #f3f4f6;
+  --accent-soft: #f9fafb;
+  --accent-text: #4b5563;
+  --accent-on-dark: #4b5563;
+  --money: #166534;
+  --money-soft: #f0fdf4;
+  --wa: #111827;
+  --warn: #92400e;
+  --bad: #b91c1c;
+  --radius: 10px;
+  --shadow: none;
   --head: 'Segoe UI', 'Helvetica Neue', system-ui, -apple-system, Arial, sans-serif;
   color-scheme: light;
-}
-@media (prefers-color-scheme: dark) {
-  :root {
-    --ink: #eef2fb;
-    --muted: #a8b3cc;
-    --paper: #0a1226;
-    --card: #121c38;
-    --line: #253259;
-    --brand: #7aa7ff;
-    --accent-text: #8fb6ff;
-    --money: #4fd39a;
-    --money-soft: #12352a;
-    --wa: #1f9d5a;
-    --warn: #f6c56b;
-    --bad: #ff9a8f;
-    --shadow: none;
-    color-scheme: dark;
-  }
 }
 * { box-sizing: border-box; }
 html, body { margin: 0; background: var(--paper); color: var(--ink); }
@@ -284,36 +266,74 @@ main { padding: 0 16px; }
 .ob-card .btn { margin-top: 18px; }
 .ob-card .back { margin: 0 0 12px; }
 
-@media (prefers-color-scheme: dark) {
-  .tip { background: #3a2f12; color: #f7e3ae; border-color: #5a4a1c; }
-  .hint, .demo-bar { background: #142a44; color: #cfe2fb; }
-  .warn-box { background: #4a1f1b; color: #ffd6d0; }
-  .avatar, .suggest { background: #1d2a5c; color: #d6dcff; }
-  .due-overdue, .trust-bad { background: #4a1f1b; color: #ffc4bc; }
-  .due-today, .due-soon, .trust-ok { background: #45330f; color: #fbd78f; }
-  .due-later, .trust-new { background: #2a312e; color: #d3dad6; }
-  .due-paid, .trust-good { background: #1d2a5c; color: #9fe7c3; }
-  .btn { background: var(--accent); color: var(--brand-dark); }
-  .btn.ghost { background: var(--card); color: var(--ink); }
-  .btn.wa { color: #fff; }
-  .plan .btn { color: var(--brand-dark); }
-  .chips button.on { background: var(--accent); color: var(--brand-dark); border-color: var(--accent); }
-  .search, .input { border-color: #56608a; }
-  .l-section.alt, .price-card, .step { background: var(--card); }
-  .feature, .faq details { background: #0f1630; }
-}
 
-/* Blue-and-white overrides */
-.l-btn.accent { background: #ffffff; color: var(--brand); border-color: #ffffff; }
-.l-section .l-btn.accent { background: var(--brand); color: #ffffff; border-color: var(--brand); }
-.fab { background: var(--brand); color: #ffffff; box-shadow: 0 10px 24px rgba(22, 82, 214, 0.4); }
-.plan-banner { box-shadow: none; border: 1px solid #c4d6fb; }
-.logo-mark { background: #ffffff; color: var(--brand); }
-.brand.on-light .logo-mark { background: var(--brand); color: #ffffff; }
-.notice { border-left-color: #7fb0ff; }
-.mock-receipt { background: #ffffff; color: var(--brand); }
-@media (prefers-color-scheme: dark) {
-  .l-section .l-btn.accent, .fab { background: #2563eb; }
-  .plan-banner { border-color: #2c3f74; background: #1a2a55; color: #e3ecff; }
-}
-.mock-bar .logo-mark { background: var(--brand); color: #ffffff; }
+
+
+/* ---------- Plain theme overrides ---------- */
+.l-header, .l-header.compact { background: #ffffff; color: var(--ink); border-bottom: 1px solid var(--line); padding-bottom: 40px; }
+.l-header.compact { padding-bottom: 14px; }
+.brand, .brand.on-light { color: var(--ink); }
+.logo-mark, .logo-mark.sm, .brand.on-light .logo-mark, .mock-bar .logo-mark { background: var(--ink); color: #ffffff; border-radius: 8px; box-shadow: none; transform: none; border: none; }
+.logo-mark::after { display: none; }
+.l-links a { color: var(--muted); }
+.l-links a:hover { color: var(--ink); }
+.eyebrow, .eyebrow.light { color: var(--muted); letter-spacing: 0.08em; }
+.l-hero h1 { color: var(--ink); font-weight: 700; letter-spacing: -0.02em; font-size: clamp(2.1rem, 6vw, 3.4rem); }
+.l-section h2, .l-cta h2 { font-weight: 700; letter-spacing: -0.01em; }
+.lede { color: var(--muted); }
+.notice { background: var(--accent-soft); color: var(--ink); border-left: 3px solid var(--line); }
+.l-btn, .l-btn.small { border-radius: 8px; }
+.l-btn.accent, .l-section .l-btn.accent { background: var(--ink); color: #ffffff; border-color: var(--ink); }
+.l-btn.accent:hover { filter: none; transform: none; background: #000000; }
+.l-btn.ghost-light { background: #ffffff; color: var(--ink); border-color: #d1d5db; }
+.l-btn.dark { background: #ffffff; color: var(--ink); border: 1px solid #d1d5db; }
+.mock-phone { box-shadow: 0 0 0 1px #d1d5db, 0 12px 30px rgba(17, 24, 39, 0.08); transform: none; border-radius: 28px; }
+.mock-notch { background: #e5e7eb; }
+.mock-hero { background: #ffffff; color: var(--ink); border: 1px solid var(--line); }
+.mock-hero span { color: var(--muted); opacity: 1; }
+.mock-hero em { background: #f3f4f6; }
+.mock-av { background: #f3f4f6; color: var(--ink); }
+.mock-bubble { box-shadow: 0 6px 16px rgba(17, 24, 39, 0.1); transform: none; background: #f0fdf4; border: 1px solid #dcfce7; }
+.mock-receipt { background: #ffffff; color: var(--ink); border: 1px solid var(--line); box-shadow: none; transform: none; }
+.l-section.alt { background: #ffffff; }
+.step, .feature, .price-card, .faq details { background: #ffffff; box-shadow: none; border-radius: var(--radius); }
+.step-num { background: #f3f4f6; color: var(--ink); border: 1px solid var(--line); }
+.step-icon, .l-cta svg { color: var(--ink); }
+.feature-icon { background: #f3f4f6; color: var(--ink); border-radius: 8px; }
+.price-card.featured { border: 1px solid var(--ink); }
+.ribbon { background: #f3f4f6; color: var(--ink); border: 1px solid var(--line); }
+.l-cta { background: #ffffff; color: var(--ink); border-top: 1px solid var(--line); }
+.l-cta p { color: var(--muted); }
+.l-footer { background: #f9fafb; color: var(--muted); border-top: 1px solid var(--line); }
+.l-footer h2 { color: var(--ink); }
+.l-footer a { color: var(--brand); }
+.l-copy { color: var(--muted); border-top-color: var(--line); }
+.legal-body a, .toggle a, .plan a, .legal-links a { color: var(--brand); }
+
+.hdr { background: #ffffff; color: var(--ink); border-bottom: 1px solid var(--line); }
+.icon-btn { color: var(--ink); }
+.hero { background: #ffffff; color: var(--ink); border: 1px solid var(--line); box-shadow: none; border-radius: var(--radius); }
+.hero::after { display: none; }
+.hero > span { color: var(--muted); }
+.hero-row button { background: #f3f4f6; color: var(--ink); }
+.plan-banner, .tip, .demo-bar, .hint { background: #f9fafb; color: var(--ink); border: 1px solid var(--line); box-shadow: none; }
+.warn-box { background: #fef2f2; color: #991b1b; border: 1px solid #fecaca; }
+.section { color: var(--muted); letter-spacing: 0.08em; }
+.avatar, .suggest { background: #f3f4f6; color: var(--ink); }
+.due-overdue, .trust-bad { background: #fef2f2; color: #991b1b; }
+.due-today, .due-soon, .trust-ok { background: #fffbeb; color: #92400e; }
+.due-later, .trust-new { background: #f3f4f6; color: #374151; }
+.due-paid, .trust-good { background: #f0fdf4; color: #166534; }
+.btn { background: var(--ink); color: #ffffff; border-radius: 8px; }
+.btn.wa, .remind-mini { background: var(--ink); color: #ffffff; }
+.btn.ghost { background: #ffffff; color: var(--ink); border: 1px solid #d1d5db; }
+.fab { background: var(--ink); color: #ffffff; box-shadow: 0 6px 16px rgba(17, 24, 39, 0.2); border-radius: 8px; }
+.nav button.on { color: var(--ink); }
+.chips button.on { background: var(--ink); border-color: var(--ink); }
+.input:focus, .search:focus { border-color: var(--ink); box-shadow: 0 0 0 3px rgba(17, 24, 39, 0.12); }
+.progress div { background: var(--money); }
+.plan.pro { border: 1px solid var(--ink); }
+.onboard { background: #f9fafb; }
+.ob-card { box-shadow: none; border: 1px solid var(--line); border-radius: 12px; }
+.bubble { background: #f0fdf4; border: 1px solid #dcfce7; }
+:focus-visible { outline: 3px solid var(--brand); }
