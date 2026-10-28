@@ -15,7 +15,7 @@ const debt = (over: Partial<Debt> = {}): Debt => ({
   ...over,
 })
 const customer: Customer = { id: 'c1', name: 'Chioma Obi', phone: '0803 123 4567', createdAt: '' }
-const settings: Settings = { businessName: "Ada's Closet", sellerPhone: '', payLink: 'https://paystack.shop/pay/ada', bankDetails: '', lang: 'en', footer: true, onboarded: true }
+const settings: Settings = { businessName: "Ada's Closet", payLink: 'https://paystack.shop/pay/ada', bankDetails: '', lang: 'en', footer: true, onboarded: true }
 
 describe('waNumber', () => {
   it('normalises Nigerian formats', () => {

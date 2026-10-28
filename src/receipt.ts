@@ -11,18 +11,18 @@ export async function receiptImage(debt: Debt, customer: Customer, s: Settings):
   const g = c.getContext('2d')!
   const font = (size: number, weight = 400) => `${weight} ${size}px "Segoe UI", Roboto, Arial, sans-serif`
 
-  g.fillStyle = '#f6f7f5'
+  g.fillStyle = '#f6f9ff'
   g.fillRect(0, 0, W, H)
-  g.fillStyle = '#0b3d30'
+  g.fillStyle = '#0a2463'
   g.fillRect(0, 0, W, 200)
-  g.fillStyle = '#7fe0b8'
+  g.fillStyle = '#a9c8ff'
   g.font = font(22, 700)
   g.fillText(isPaid(debt) ? 'PAYMENT RECEIPT' : 'BALANCE NOTICE', 48, 70)
   g.fillStyle = '#ffffff'
   g.font = font(44, 800)
   g.fillText(clip(g, s.businessName || 'My Business', W - 96), 48, 128)
   g.font = font(22)
-  g.fillStyle = '#cfe9de'
+  g.fillStyle = '#d7e3ff'
   g.fillText(prettyDate(new Date().toISOString()), 48, 170)
 
   const rows: [string, string][] = [
@@ -51,13 +51,13 @@ export async function receiptImage(debt: Debt, customer: Customer, s: Settings):
   }
 
   const bal = balanceOf(debt)
-  g.fillStyle = bal === 0 ? '#e3f6ec' : '#fff3e0'
+  g.fillStyle = bal === 0 ? '#daf3e6' : '#eef4ff'
   roundRect(g, 48, y + 10, W - 96, 150, 24)
   g.fill()
   g.fillStyle = '#52514e'
   g.font = font(24, 600)
   g.fillText(bal === 0 ? 'Fully paid — thank you!' : 'Balance remaining', 80, y + 62)
-  g.fillStyle = bal === 0 ? '#0b7a5a' : '#b45309'
+  g.fillStyle = bal === 0 ? '#0d7a50' : '#1652d6'
   g.font = font(56, 800)
   g.fillText(naira(bal), 80, y + 128)
 

@@ -12,8 +12,8 @@ export default defineConfig({
         name: 'Kolekt – who owes you',
         short_name: 'Kolekt',
         description: 'Track credit sales, send polite WhatsApp reminders and get paid.',
-        theme_color: '#0b3d30',
-        background_color: '#f6f7f5',
+        theme_color: '#0a2463',
+        background_color: '#f6f9ff',
         display: 'standalone',
         start_url: '/',
         icons: [

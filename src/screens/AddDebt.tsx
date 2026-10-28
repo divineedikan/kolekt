@@ -62,7 +62,7 @@ export function AddDebt({ customerId }: { customerId?: string }) {
     <div className="screen">
       <Header title="New credit sale" back />
       <main className="form">
-        <label>Customer</label>
+        <label htmlFor="f-name">Customer</label>
         {picked ? (
           <div className="picked">
             <span>
@@ -74,50 +74,51 @@ export function AddDebt({ customerId }: { customerId?: string }) {
           </div>
         ) : (
           <>
-            <input className="input" placeholder="Name e.g. Chioma" value={name} onChange={(e) => setName(e.target.value)} autoFocus />
+            <input id="f-name" className="input" autoComplete="off" placeholder="Name e.g. Chioma" value={name} onChange={(e) => setName(e.target.value)} autoFocus />
             {matches.map((c) => (
               <button key={c.id} className="suggest" onClick={() => setPickedId(c.id)}>
                 👤 {c.name} <span className="muted">{c.phone}</span>
               </button>
             ))}
-            <input className="input" type="tel" inputMode="tel" placeholder="WhatsApp number e.g. 0803 123 4567" value={phone} onChange={(e) => setPhone(e.target.value)} />
+            <input id="f-phone" aria-label="Customer's WhatsApp number" className="input" type="tel" inputMode="tel" autoComplete="off" placeholder="WhatsApp number e.g. 0803 123 4567" value={phone} onChange={(e) => setPhone(e.target.value)} />
             {contacts && (
               <button className="link-btn" onClick={fromContacts}>
-                📇 Pick from phone contacts
+                Pick from phone contacts
               </button>
             )}
           </>
         )}
 
-        <label>What did they buy?</label>
-        <input className="input" placeholder="e.g. 2 Ankara gowns" value={item} onChange={(e) => setItem(e.target.value)} />
+        <label htmlFor="f-item">What did they buy?</label>
+        <input id="f-item" className="input" placeholder="e.g. 2 Ankara gowns" value={item} onChange={(e) => setItem(e.target.value)} />
 
         <div className="two">
           <div>
-            <label>Total price (₦)</label>
-            <input className="input" inputMode="numeric" placeholder="15000" value={amount} onChange={(e) => setAmount(e.target.value)} />
+            <label htmlFor="f-amount">Total price (₦)</label>
+            <input id="f-amount" className="input" inputMode="numeric" placeholder="15000" value={amount} onChange={(e) => setAmount(e.target.value)} />
           </div>
           <div>
-            <label>Paid now (₦)</label>
-            <input className="input" inputMode="numeric" placeholder="0" value={paidNow} onChange={(e) => setPaidNow(e.target.value)} />
+            <label htmlFor="f-paid">Paid now (₦)</label>
+            <input id="f-paid" className="input" inputMode="numeric" placeholder="0" value={paidNow} onChange={(e) => setPaidNow(e.target.value)} />
           </div>
         </div>
         {total > 0 && <p className="muted small">They will owe you <b>{naira(total - paid)}</b></p>}
 
-        <label>When will they pay?</label>
-        <div className="chips">
+        <label htmlFor="f-due">When will they pay?</label>
+        <div className="chips" role="group" aria-label="Quick due dates">
           {dueOptions().map((o) => (
-            <button key={o.label} className={due === o.value ? 'on' : ''} onClick={() => setDue(o.value)}>
+            <button key={o.label} className={due === o.value ? 'on' : ''} aria-pressed={due === o.value} onClick={() => setDue(o.value)}>
               {o.label}
             </button>
           ))}
         </div>
-        <input className="input" type="date" value={due} onChange={(e) => setDue(e.target.value)} />
+        <input id="f-due" className="input" type="date" value={due} onChange={(e) => setDue(e.target.value)} />
         <p className="muted small">Due {prettyDate(due)}</p>
 
-        <label>Note (optional)</label>
-        <input className="input" placeholder="e.g. Will pay after salary" value={note} onChange={(e) => setNote(e.target.value)} />
+        <label htmlFor="f-note">Note (optional)</label>
+        <input id="f-note" className="input" placeholder="e.g. Will pay after salary" value={note} onChange={(e) => setNote(e.target.value)} />
 
+        <p className="muted tiny">Only add customers who agreed to get payment reminders from you on WhatsApp.</p>
         <button className="btn sticky" onClick={save}>
           Save credit sale
         </button>

@@ -1,7 +1,11 @@
 import { useEffect, useState } from 'react'
 
+export type LegalPage = 'privacy' | 'terms' | 'refunds' | 'cookies'
+
 export type Route =
   | { name: 'home' }
+  | { name: 'welcome' }
+  | { name: 'start' }
   | { name: 'debts'; filter?: string }
   | { name: 'debt'; id: string }
   | { name: 'add'; customerId?: string }
@@ -9,12 +13,19 @@ export type Route =
   | { name: 'customer'; id: string }
   | { name: 'settings' }
   | { name: 'plans' }
-  | { name: 'privacy' }
+  | { name: 'legal'; page: LegalPage }
+
+const legalPages: LegalPage[] = ['privacy', 'terms', 'refunds', 'cookies']
 
 // Hash routing keeps the phone's back button working with no server config.
 export function parse(hash: string): Route {
   const [name = 'home', arg] = hash.replace(/^#\/?/, '').split('/')
+  if ((legalPages as string[]).includes(name)) return { name: 'legal', page: name as LegalPage }
   switch (name) {
+    case 'welcome':
+      return { name: 'welcome' }
+    case 'start':
+      return { name: 'start' }
     case 'debts':
       return { name: 'debts', filter: arg }
     case 'debt':
@@ -29,14 +40,13 @@ export function parse(hash: string): Route {
       return { name: 'settings' }
     case 'plans':
       return { name: 'plans' }
-    case 'privacy':
-      return { name: 'privacy' }
     default:
       return { name: 'home' }
   }
 }
 
 export function toHash(r: Route) {
+  if (r.name === 'legal') return `#/${r.page}`
   const arg = 'id' in r ? r.id : r.name === 'add' ? r.customerId : r.name === 'debts' ? r.filter : undefined
   return `#/${r.name}${arg ? '/' + arg : ''}`
 }

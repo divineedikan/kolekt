@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import { Users } from 'lucide-react'
 import { actions, useStore } from '../store'
 import { balanceOf, naira, trustOf, waLink } from '../utils'
 import { statementText } from '../templates'
@@ -17,9 +18,9 @@ export function Customers() {
     <div className="screen">
       <Header title="Customers" />
       <main>
-        <input className="search" placeholder="Search customers" value={q} onChange={(e) => setQ(e.target.value)} />
+        <input className="search" type="search" aria-label="Search customers" placeholder="Search customers" value={q} onChange={(e) => setQ(e.target.value)} />
         {shown.length === 0 ? (
-          <Empty icon="👥" title="No customers yet" text="Customers are added when you record a credit sale." />
+          <Empty icon={<Users size={40} />} title="No customers yet" text="Customers are added when you record a credit sale." />
         ) : (
           <div className="list">
             {shown.map((c) => (
@@ -51,7 +52,7 @@ export function CustomerDetail({ id }: { id: string }) {
     return (
       <div className="screen">
         <Header title="Customer" back />
-        <Empty icon="🤷" title="Not found" text="This customer was deleted." />
+        <Empty icon={<Users size={40} />} title="Not found" text="This customer was deleted." />
       </div>
     )
   }
@@ -80,22 +81,22 @@ export function CustomerDetail({ id }: { id: string }) {
             + New sale
           </button>
           <button className="btn wa" onClick={() => window.open(waLink(customer.phone, statementText(customer, mine, settings)), '_blank')}>
-            📄 Send statement
+            Send statement
           </button>
           <a className="btn ghost" href={`tel:${customer.phone}`}>
-            📞 Call
+            Call
           </a>
           <button className="btn ghost" onClick={() => setEditing((v) => !v)}>
-            ✏️ Edit
+            Edit
           </button>
         </div>
 
         {editing && (
           <div className="card form">
-            <label>Name</label>
-            <input className="input" defaultValue={customer.name} onBlur={(e) => e.target.value.trim() && actions.updateCustomer(id, { name: e.target.value.trim() })} />
-            <label>WhatsApp number</label>
-            <input className="input" type="tel" defaultValue={customer.phone} onBlur={(e) => actions.updateCustomer(id, { phone: e.target.value.trim() })} />
+            <label htmlFor="c-name">Name</label>
+            <input id="c-name" className="input" defaultValue={customer.name} onBlur={(e) => e.target.value.trim() && actions.updateCustomer(id, { name: e.target.value.trim() })} />
+            <label htmlFor="c-phone">WhatsApp number</label>
+            <input id="c-phone" className="input" type="tel" defaultValue={customer.phone} onBlur={(e) => actions.updateCustomer(id, { phone: e.target.value.trim() })} />
             <button className="btn small" onClick={() => (setEditing(false), toast('Saved'))}>
               Done
             </button>

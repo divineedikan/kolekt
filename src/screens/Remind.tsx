@@ -30,24 +30,24 @@ export function RemindSheet({ debt, onClose }: { debt: Debt | null; onClose: () 
 
   return (
     <Sheet open onClose={onClose} title={`Remind ${customer.name.split(' ')[0]}`}>
-      <div className="seg">
+      <div className="seg" role="group" aria-label="Message tone">
         {(Object.keys(toneNames) as Tone[]).map((k) => (
-          <button key={k} className={t === k ? 'on' : ''} onClick={() => setTone(k)}>
+          <button key={k} className={t === k ? 'on' : ''} aria-pressed={t === k} onClick={() => setTone(k)}>
             {toneNames[k]}
           </button>
         ))}
       </div>
-      <div className="seg small">
-        <button className={l === 'en' ? 'on' : ''} onClick={() => setLang('en')}>
+      <div className="seg small" role="group" aria-label="Message language">
+        <button className={l === 'en' ? 'on' : ''} aria-pressed={l === 'en'} onClick={() => setLang('en')}>
           English
         </button>
-        <button className={l === 'pcm' ? 'on' : ''} onClick={() => setLang('pcm')}>
+        <button className={l === 'pcm' ? 'on' : ''} aria-pressed={l === 'pcm'} onClick={() => setLang('pcm')}>
           Pidgin
         </button>
       </div>
-      <div className="bubble">{text}</div>
+      <div className="bubble" aria-label="Message preview">{text}</div>
       {!settings.payLink && !settings.bankDetails && (
-        <p className="hint">💡 Add your payment link in More → Payment so customers can pay in one tap.</p>
+        <p className="hint">Tip: add your payment link in More → Payment so customers can pay in one tap.</p>
       )}
       <button className="btn wa" onClick={send}>
         Send on WhatsApp

@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import { BookOpen, MessageCircle } from 'lucide-react'
 import { useStore, type Debt } from '../store'
 import { balanceOf, dueState, naira, daysUntil } from '../utils'
 import { BottomNav, DebtRow, Empty, Fab, Header } from '../components'
@@ -35,13 +36,13 @@ export function Home() {
       <main>
         {settings.demo && (
           <div className="demo-bar">
-            <span>👀 You're looking at sample data. Tap around: remind, record a payment, share a receipt.</span>
+            <span>You're looking at sample data. Tap around: remind, record a payment, share a receipt.</span>
             <button className="btn small" onClick={() => confirm('Remove the sample data and set up your own shop?') && clearDemo()}>
               Start my shop
             </button>
           </div>
         )}
-        <p className="greet">{greet} 👋</p>
+        <p className="greet">{greet}</p>
         <section className="hero">
           <span>Customers owe you</span>
           <strong>{naira(owed)}</strong>
@@ -65,27 +66,27 @@ export function Home() {
 
         {!settings.payLink && (
           <button className="tip" onClick={() => go({ name: 'settings' })}>
-            <b>🛡️ Stop fake transfer alerts</b>
+            <b>Protect yourself from fake transfer alerts</b>
             <span>Add your own payment link (Paystack, Flutterwave, Squad or Monnify). Customers pay you directly and the provider confirms it. Tap to set up.</span>
           </button>
         )}
 
         <h2 className="section">Chase today</h2>
         {debts.length === 0 ? (
-          <Empty icon="📒" title="No credit sales yet" text="Record a sale you gave on credit. Kolekt will tell you when to remind them.">
+          <Empty icon={<BookOpen size={40} />} title="No credit sales yet" text="Record a sale you gave on credit. Kolekt will tell you when to remind them.">
             <button className="btn" onClick={() => go({ name: 'add' })}>
               Record first credit sale
             </button>
           </Empty>
         ) : chase.length === 0 ? (
-          <div className="card center">🎉 Nobody to chase today. Enjoy your day!</div>
+          <div className="card center">Nobody to chase today. Enjoy your day!</div>
         ) : (
           <div className="list">
             {chase.map((d) => (
               <div key={d.id} className="chase">
                 <DebtRow debt={d} customerName={nameOf(d.customerId)} />
                 <button className="remind-mini" aria-label={`Remind ${nameOf(d.customerId)}`} onClick={() => setRemind(d)}>
-                  💬
+                  <MessageCircle size={22} aria-hidden="true" />
                 </button>
               </div>
             ))}

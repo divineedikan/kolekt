@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import { BookOpen } from 'lucide-react'
 import { actions, useStore, type Debt, type Payment } from '../store'
 import { balanceOf, daysUntil, dueState, inDays, naira, paidOf, prettyDate } from '../utils'
 import { BottomNav, DebtRow, DueBadge, Empty, Fab, Header, Sheet, toast } from '../components'
@@ -35,19 +36,19 @@ export function Debts({ filter = 'open' }: { filter?: string }) {
     <div className="screen">
       <Header title="Debts" />
       <main>
-        <div className="chips">
+        <div className="chips" role="group" aria-label="Filter debts">
           {filters.map((f) => (
-            <button key={f.key} className={filter === f.key ? 'on' : ''} onClick={() => go({ name: 'debts', filter: f.key }, true)}>
+            <button key={f.key} className={filter === f.key ? 'on' : ''} aria-pressed={filter === f.key} onClick={() => go({ name: 'debts', filter: f.key }, true)}>
               {f.label}
             </button>
           ))}
         </div>
-        <input className="search" placeholder="Search name or item" value={q} onChange={(e) => setQ(e.target.value)} />
+        <input className="search" type="search" aria-label="Search debts by name or item" placeholder="Search name or item" value={q} onChange={(e) => setQ(e.target.value)} />
         <p className="muted small">
           {shown.length} {shown.length === 1 ? 'debt' : 'debts'} · {naira(total)}
         </p>
         {shown.length === 0 ? (
-          <Empty icon="✅" title="Nothing here" text={filter === 'paid' ? 'Paid debts will show here.' : 'No debts match this filter.'} />
+          <Empty icon={<BookOpen size={40} />} title="Nothing here" text={filter === 'paid' ? 'Paid debts will show here.' : 'No debts match this filter.'} />
         ) : (
           <div className="list">
             {shown.map((d) => (
@@ -82,7 +83,7 @@ export function DebtDetail({ id }: { id: string }) {
     return (
       <div className="screen">
         <Header title="Debt" back />
-        <Empty icon="🤷" title="Not found" text="This debt was deleted." />
+        <Empty icon={<BookOpen size={40} />} title="Not found" text="This debt was deleted." />
       </div>
     )
   }
@@ -126,16 +127,16 @@ export function DebtDetail({ id }: { id: string }) {
         <div className="actions">
           {bal > 0 && (
             <button className="btn wa" onClick={() => setRemind(true)}>
-              💬 Remind
+              Remind on WhatsApp
             </button>
           )}
           {bal > 0 && (
             <button className="btn" onClick={() => setPaying(true)}>
-              ✅ Record payment
+              Record payment
             </button>
           )}
           <button className="btn ghost" onClick={share}>
-            🧾 Share receipt
+            Share receipt
           </button>
           {bal > 0 && (
             <button
@@ -145,13 +146,13 @@ export function DebtDetail({ id }: { id: string }) {
                 toast('Moved due date 7 days ahead')
               }}
             >
-              ⏳ Give 7 more days
+              Give 7 more days
             </button>
           )}
         </div>
 
         {settings.payLink && bal > 0 && (
-          <p className="hint">🛡️ Before releasing goods, confirm the payment in your payment or bank app. Never trust a screenshot alone.</p>
+          <p className="hint">Before releasing goods, confirm the payment in your payment or bank app. Never trust a screenshot alone.</p>
         )}
 
         <h2 className="section">History</h2>
@@ -199,14 +200,14 @@ export function DebtDetail({ id }: { id: string }) {
 
       <RemindSheet debt={remind ? debt : null} onClose={() => setRemind(false)} />
       <Sheet open={paying} onClose={() => setPaying(false)} title="Record payment">
-        <input className="input big-input" inputMode="numeric" placeholder="Amount (₦)" value={amount} onChange={(e) => setAmount(e.target.value)} autoFocus />
+        <input className="input big-input" inputMode="numeric" aria-label="Amount paid in naira" placeholder="Amount (₦)" value={amount} onChange={(e) => setAmount(e.target.value)} autoFocus />
         <div className="chips">
           <button onClick={() => setAmount(String(bal))}>Full {naira(bal)}</button>
           <button onClick={() => setAmount(String(Math.round(bal / 2)))}>Half</button>
         </div>
-        <div className="seg">
+        <div className="seg" role="group" aria-label="Payment method">
           {methods.map((m) => (
-            <button key={m.key} className={method === m.key ? 'on' : ''} onClick={() => setMethod(m.key)}>
+            <button key={m.key} className={method === m.key ? 'on' : ''} aria-pressed={method === m.key} onClick={() => setMethod(m.key)}>
               {m.label}
             </button>
           ))}
@@ -215,7 +216,7 @@ export function DebtDetail({ id }: { id: string }) {
           <p className="warn-box">⚠️ Open your bank app and confirm the money landed before you mark it paid. Fake alerts and edited receipt screenshots are common.</p>
         )}
         {method === 'paystack' && (
-          <p className="hint">🛡️ Confirm it in your payment app (Paystack, Flutterwave, Squad…) or email first. A screenshot is not proof.</p>
+          <p className="hint">Confirm it in your payment app (Paystack, Flutterwave, Squad…) or email first. A screenshot is not proof.</p>
         )}
         <button className="btn" onClick={savePayment}>
           {method === 'transfer' || method === 'paystack' ? "I've confirmed — save payment" : 'Save payment'}

@@ -35,7 +35,6 @@ export interface Debt {
 
 export interface Settings {
   businessName: string
-  sellerPhone: string
   payLink: string // seller's own payment link (any provider)
   bankDetails: string // fallback when the seller has no payment link yet
   lang: Lang
@@ -57,7 +56,6 @@ const defaultState: State = {
   debts: [],
   settings: {
     businessName: '',
-    sellerPhone: '',
     payLink: '',
     bankDetails: '',
     lang: 'en',

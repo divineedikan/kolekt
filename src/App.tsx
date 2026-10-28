@@ -4,13 +4,17 @@ import { Home } from './screens/Home'
 import { DebtDetail, Debts } from './screens/Debts'
 import { AddDebt } from './screens/AddDebt'
 import { CustomerDetail, Customers } from './screens/Customers'
-import { Onboarding, Plans, Privacy, Settings } from './screens/Settings'
+import { Onboarding, Plans, Settings } from './screens/Settings'
+import { Landing } from './screens/Landing'
+import { Legal } from './screens/Legal'
 
 export default function App() {
   const { settings } = useStore()
   const route = useRoute()
-  if (route.name === 'privacy') return <Privacy />
-  if (!settings.onboarded) return <Onboarding />
+
+  if (route.name === 'legal') return <Legal page={route.page} />
+  if (route.name === 'welcome') return <Landing />
+  if (!settings.onboarded) return route.name === 'start' ? <Onboarding /> : <Landing />
 
   switch (route.name) {
     case 'debts':

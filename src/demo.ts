@@ -23,7 +23,6 @@ export function loadDemo() {
     ],
     settings: {
       businessName: "Ada's Closet (demo)",
-      sellerPhone: '',
       payLink: 'https://paystack.shop/pay/demo',
       bankDetails: '',
       lang: 'en',
@@ -39,6 +38,6 @@ export function clearDemo() {
   actions.replaceAll({
     customers: [],
     debts: [],
-    settings: { businessName: '', sellerPhone: '', payLink: '', bankDetails: '', lang: 'en', footer: true, onboarded: false, demo: false },
+    settings: { businessName: '', payLink: '', bankDetails: '', lang: 'en', footer: true, onboarded: false, demo: false },
   })
 }
