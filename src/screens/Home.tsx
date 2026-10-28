@@ -4,6 +4,7 @@ import { balanceOf, dueState, naira, daysUntil } from '../utils'
 import { BottomNav, DebtRow, Empty, Fab, Header } from '../components'
 import { go } from '../router'
 import { RemindSheet } from './Remind'
+import { clearDemo } from '../demo'
 
 export function Home() {
   const { debts, customers, settings } = useStore()
@@ -32,6 +33,14 @@ export function Home() {
     <div className="screen">
       <Header title={settings.businessName || 'Kolekt'} />
       <main>
+        {settings.demo && (
+          <div className="demo-bar">
+            <span>👀 You're looking at sample data. Tap around: remind, record a payment, share a receipt.</span>
+            <button className="btn small" onClick={() => confirm('Remove the sample data and set up your own shop?') && clearDemo()}>
+              Start my shop
+            </button>
+          </div>
+        )}
         <p className="greet">{greet} 👋</p>
         <section className="hero">
           <span>Customers owe you</span>

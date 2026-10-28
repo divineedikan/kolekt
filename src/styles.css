@@ -166,3 +166,11 @@ main { padding: 0 16px; }
 .remind-mini { flex: none; width: 56px; border-radius: var(--radius); background: var(--wa); color: #fff; font-size: 22px; }
 .warn-box { font-size: 14px; background: #fde8e6; color: #8a1f14; padding: 10px 12px; border-radius: 12px; }
 @media (prefers-color-scheme: dark) { .warn-box { background: #4a1f1b; color: #ffcdc6; } }
+.demo-bar { margin-top: 14px; display: flex; gap: 10px; align-items: center; background: #eef5ff; color: #1d4e89; border-radius: var(--radius); padding: 12px 14px; font-size: 14px; }
+.demo-bar .btn { flex: none; }
+.prose { padding-top: 8px; line-height: 1.55; }
+.prose h3 { margin: 20px 0 6px; font-size: 16px; }
+.prose p { margin: 6px 0; }
+.ob-card a, .prose a, .tiny a { color: var(--brand-2); text-decoration: underline; }
+.ob-card .btn.ghost { margin-top: 10px; }
+@media (prefers-color-scheme: dark) { .demo-bar { background: #142a44; color: #bcd7f7; } }

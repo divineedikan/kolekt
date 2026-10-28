@@ -4,6 +4,7 @@ import { balanceOf, naira } from '../utils'
 import { BottomNav, Header, toast } from '../components'
 import { go } from '../router'
 import { config } from '../config'
+import { loadDemo } from '../demo'
 
 interface InstallPrompt extends Event {
   prompt(): Promise<void>
@@ -146,7 +147,9 @@ export function Settings() {
         </div>
         <input ref={file} type="file" accept="application/json" hidden onChange={(e) => e.target.files?.[0] && restore(e.target.files[0])} />
 
-        <p className="muted tiny center">Kolekt v0.1 · Not a loan app. Kolekt never lends, holds or moves money.</p>
+        <p className="muted tiny center">
+          Kolekt v0.1 · Not a loan app. Kolekt never lends, holds or moves money. <a href="#/privacy">Privacy</a>
+        </p>
       </main>
       <BottomNav current="settings" />
     </div>
@@ -222,7 +225,12 @@ export function Onboarding() {
           <button className="btn" onClick={() => setStep(1)}>
             Start free
           </button>
-          <p className="muted tiny">No sign-up. Your data stays on your phone.</p>
+          <button className="btn ghost" onClick={loadDemo}>
+            👀 See a demo first
+          </button>
+          <p className="muted tiny">
+            No sign-up. Your data stays on your phone. <a href="#/privacy">Privacy</a>
+          </p>
         </div>
       ) : (
         <div className="ob-card">
@@ -243,6 +251,30 @@ export function Onboarding() {
           </button>
         </div>
       )}
+    </div>
+  )
+}
+
+export function Privacy() {
+  return (
+    <div className="screen">
+      <Header title="Privacy" back />
+      <main className="prose">
+        <p>
+          <b>Short version:</b> Kolekt keeps your records on your phone. We don't collect, sell or see your customers' details.
+        </p>
+        <h3>What is stored</h3>
+        <p>Your business name, payment link, customers' names and phone numbers, and the sales and payments you record. All of it is saved in this browser on your device only.</p>
+        <h3>What leaves your phone</h3>
+        <p>Only what you choose to send: when you tap "Send on WhatsApp" or share a receipt, the message goes through WhatsApp or the app you pick. Payments go straight from your customer to your own Paystack account. Kolekt never holds money.</p>
+        <h3>Your customers</h3>
+        <p>You are responsible for having your customers' permission to message them about what they owe. Kolekt never messages anyone by itself and never contacts a customer's friends or contacts.</p>
+        <h3>Deleting data</h3>
+        <p>Delete any customer or sale in the app, or clear this site's data in your browser settings to remove everything. Back up first if you want to keep it.</p>
+        <h3>Contact</h3>
+        <p>Questions: message us on WhatsApp at +{config.founderWhatsApp}.</p>
+        <p className="muted tiny">Last updated October 2026. This notice will change when cloud backup (Pro) launches.</p>
+      </main>
     </div>
   )
 }

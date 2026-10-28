@@ -9,6 +9,7 @@ export type Route =
   | { name: 'customer'; id: string }
   | { name: 'settings' }
   | { name: 'plans' }
+  | { name: 'privacy' }
 
 // Hash routing keeps the phone's back button working with no server config.
 export function parse(hash: string): Route {
@@ -28,6 +29,8 @@ export function parse(hash: string): Route {
       return { name: 'settings' }
     case 'plans':
       return { name: 'plans' }
+    case 'privacy':
+      return { name: 'privacy' }
     default:
       return { name: 'home' }
   }

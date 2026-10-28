@@ -41,6 +41,7 @@ export interface Settings {
   lang: Lang
   footer: boolean
   onboarded: boolean
+  demo?: boolean // true while sample data is loaded
 }
 
 export interface State {

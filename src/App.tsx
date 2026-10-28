@@ -4,11 +4,12 @@ import { Home } from './screens/Home'
 import { DebtDetail, Debts } from './screens/Debts'
 import { AddDebt } from './screens/AddDebt'
 import { CustomerDetail, Customers } from './screens/Customers'
-import { Onboarding, Plans, Settings } from './screens/Settings'
+import { Onboarding, Plans, Privacy, Settings } from './screens/Settings'
 
 export default function App() {
   const { settings } = useStore()
   const route = useRoute()
+  if (route.name === 'privacy') return <Privacy />
   if (!settings.onboarded) return <Onboarding />
 
   switch (route.name) {
