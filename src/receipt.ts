@@ -20,10 +20,17 @@ export async function receiptImage(debt: Debt, customer: Customer, s: Settings):
   g.fillText(isPaid(debt) ? 'PAYMENT RECEIPT' : 'BALANCE NOTICE', 48, 70)
   g.fillStyle = '#111827'
   g.font = font(44, 800)
-  g.fillText(clip(g, s.businessName || 'My Business', W - 96), 48, 128)
+  g.fillText(clip(g, s.businessName || 'My Business', s.logo ? W - 280 : W - 96), 48, 128)
   g.font = font(22)
   g.fillStyle = '#4b5563'
   g.fillText(prettyDate(new Date().toISOString()), 48, 170)
+
+  if (s.logo) {
+    const logo = await loadImage(s.logo)
+    const h = 110
+    const w = Math.min(160, (logo.width / logo.height) * h)
+    g.drawImage(logo, W - 48 - w, 45, w, h)
+  }
 
   const rows: [string, string][] = [
     ['Customer', customer.name],
@@ -70,6 +77,14 @@ export async function receiptImage(debt: Debt, customer: Customer, s: Settings):
 }
 
 const isPaid = (d: Debt) => balanceOf(d) === 0
+
+const loadImage = (src: string) =>
+  new Promise<HTMLImageElement>((res, rej) => {
+    const i = new Image()
+    i.onload = () => res(i)
+    i.onerror = rej
+    i.src = src
+  })
 
 function clip(g: CanvasRenderingContext2D, text: string, max: number) {
   if (g.measureText(text).width <= max) return text

@@ -41,6 +41,7 @@ export interface Settings {
   footer: boolean
   onboarded: boolean
   demo?: boolean // true while sample data is loaded
+  logo?: string // small data URL shown on receipts (Pro)
 }
 
 export interface State {
@@ -86,6 +87,12 @@ function commit(next: State) {
     // Storage full or blocked: keep working in memory for this session.
   }
   listeners.forEach((l) => l())
+}
+
+// Lets non-React code (cloud sync) react to every change.
+export function subscribe(listener: () => void) {
+  listeners.add(listener)
+  return () => listeners.delete(listener)
 }
 
 export function useStore(): State {

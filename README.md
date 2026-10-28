@@ -36,6 +36,17 @@ Open the printed URL on your phone (same Wi-Fi) to test. Tests: `npm test`. Prod
 
 Cloudflare Pages (free, commercial use allowed): connect the GitHub repo, build command `npm run build`, output folder `dist`. Every push redeploys, which works well when coding from a phone in GitHub Codespaces.
 
+## Turn on cloud backup and Pro (Supabase, free tier)
+
+1. Create a project at supabase.com (pick the region closest to Nigeria, e.g. EU West).
+2. SQL Editor > New query > paste `supabase/schema.sql` > Run.
+3. Authentication > Sign In / Providers: keep Email on. Authentication > Emails > "Magic Link" template: add `{{ .Token }}` to the body so users get a 6-digit code.
+4. Project Settings > API: copy the Project URL and the `anon` public key into a new file `.env.local` (see `.env.example`). Never use the `service_role` key in the app.
+5. Rebuild and deploy: `npm run build` then `npx wrangler@3.99.0 pages deploy dist --project-name kolekt --branch main`.
+6. When someone pays for Pro: Table Editor > profiles > find their row (match the email in Authentication > Users) > set `pro_until` to the end date.
+
+Until steps 1–5 are done the cloud section stays hidden and the app works phone-only.
+
 ## Next steps (from the build plan)
 
 1. Week 0: run it with 5 real sellers before adding more features.

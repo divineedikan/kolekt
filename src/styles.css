@@ -337,3 +337,8 @@ main { padding: 0 16px; }
 .ob-card { box-shadow: none; border: 1px solid var(--line); border-radius: 12px; }
 .bubble { background: #f0fdf4; border: 1px solid #dcfce7; }
 :focus-visible { outline: 3px solid var(--brand); }
+.cloud-card .actions { margin-bottom: 0; }
+.link-btn.inline { margin: 0; display: inline; }
+.logo-row { display: flex; align-items: center; gap: 12px; flex-wrap: wrap; }
+.logo-preview { width: 56px; height: 56px; object-fit: contain; border: 1px solid var(--line); border-radius: 8px; background: #fff; }
+.btn:disabled { opacity: 0.5; cursor: not-allowed; }

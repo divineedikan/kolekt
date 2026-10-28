@@ -22,7 +22,7 @@ const pages: Record<LegalPage, ReactNode> = {
   privacy: (
     <>
       <p>
-        <b>Short version:</b> Kolekt keeps your records on your phone. We do not collect, sell or see your customers' details.
+        <b>Short version:</b> Unless you turn on cloud backup, Kolekt keeps your records only on your phone. We never sell or share your data or your customers' details.
       </p>
       <h2>Who we are</h2>
       <p>
@@ -31,7 +31,7 @@ const pages: Record<LegalPage, ReactNode> = {
       <h2>What is stored, and where</h2>
       <p>
         Your business name, your payment link or bank details, your customers' names and WhatsApp numbers, and the sales and payments you record. All of it is saved in
-        your browser's storage on your device. It is not sent to our servers. We only ask for what the app needs to work.
+        your browser's storage on your device. It is not sent to our servers unless you turn on cloud backup (below). We only ask for what the app needs to work.
       </p>
       <h2>What leaves your phone</h2>
       <p>
@@ -50,8 +50,14 @@ const pages: Record<LegalPage, ReactNode> = {
         You can view, correct or delete any record in the app at any time. To remove everything, clear this site's data in your browser settings. Back up first if you want to keep
         a copy.
       </p>
+      <h2>Cloud backup (Pro, optional)</h2>
+      <p>
+        If you sign in for cloud backup, we store your email address and a copy of your Kolekt records with our database provider, Supabase, so you can restore them
+        on another phone. Only you can read your backup: access is locked to your account. Sign out and ask us on WhatsApp to delete your account and backup at any time,
+        and we will do so within 7 days. If you never sign in, nothing leaves your phone.
+      </p>
       <h2>Changes</h2>
-      <p>When cloud backup (Pro) launches, this policy will be updated before any data is stored online, and you will be asked to agree.</p>
+      <p>If we change how data is handled, we will update this page and show the new date at the top.</p>
     </>
   ),
   terms: (
@@ -110,7 +116,7 @@ const pages: Record<LegalPage, ReactNode> = {
       </p>
       <h2>What we use instead</h2>
       <p>
-        The app saves your records in your browser's local storage, and stores app files so it can open offline. This is needed for the app to work and never leaves your device.
+        The app saves your records in your browser's local storage, and stores app files so it can open offline. This is needed for the app to work and never leaves your device. If you sign in for cloud backup, a sign-in token is also kept in local storage so you stay signed in.
       </p>
       <h2>Third parties</h2>
       <p>

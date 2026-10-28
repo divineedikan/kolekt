@@ -5,6 +5,8 @@ import { balanceOf, naira } from '../utils'
 import { BottomNav, Header, Logo, toast } from '../components'
 import { go } from '../router'
 import { config } from '../config'
+import { CloudSection } from './Cloud'
+import { cloudEnabled, isProActive, useCloud } from '../cloud'
 
 interface InstallPrompt extends Event {
   prompt(): Promise<void>
@@ -50,6 +52,9 @@ function Field({ label, k, placeholder, type = 'text', hint }: { label: string; 
 
 export function Settings() {
   const state = useStore()
+  const cloud = useCloud()
+  // Footer removal is a Pro perk once Pro exists; before cloud is set up, everyone can toggle it.
+  const canHideFooter = !cloudEnabled || isProActive(cloud)
   const { settings } = state
   const file = useRef<HTMLInputElement>(null)
   const [canInstall, setCanInstall] = useState(!!deferredInstall)
@@ -125,6 +130,8 @@ export function Settings() {
         />
         <Field label="Or bank details (fallback)" k="bankDetails" placeholder="0123456789 · Bank name · Account name" />
 
+        <CloudSection />
+
         <h2 className="section">Reminders</h2>
         <fieldset className="seg" aria-label="Default reminder language">
           <button className={settings.lang === 'en' ? 'on' : ''} aria-pressed={settings.lang === 'en'} onClick={() => actions.updateSettings({ lang: 'en' })}>
@@ -135,12 +142,12 @@ export function Settings() {
           </button>
         </fieldset>
         <label className="toggle">
-          <input type="checkbox" checked={settings.footer} onChange={(e) => actions.updateSettings({ footer: e.target.checked })} />
-          Add "sent with Kolekt" to messages (helps Kolekt stay free)
+          <input type="checkbox" checked={settings.footer || !canHideFooter} disabled={!canHideFooter} onChange={(e) => actions.updateSettings({ footer: e.target.checked })} />
+          Add "sent with Kolekt" to messages{canHideFooter ? ' (helps Kolekt stay free)' : ' (Pro can turn this off)'}
         </label>
 
         <h2 className="section">Your data</h2>
-        <p className="muted tiny">Your records are stored only on this phone. Back up regularly.</p>
+        <p className="muted tiny">{cloudEnabled && isProActive(cloud) ? 'Your records are on this phone and backed up to the cloud.' : 'Your records are stored only on this phone. Back up regularly.'}</p>
         <div className="actions">
           <button className="btn ghost" onClick={backup}>
             <Download size={18} aria-hidden="true" /> Back up
@@ -160,7 +167,7 @@ export function Settings() {
         <p className="muted tiny center legal-links">
           <a href="#/privacy">Privacy</a> · <a href="#/terms">Terms</a> · <a href="#/refunds">Refunds</a> · <a href="#/cookies">Cookies</a>
         </p>
-        <p className="muted tiny center">Kolekt v0.2 · Not a loan app. Kolekt never lends, holds or moves money.</p>
+        <p className="muted tiny center">Kolekt v0.3 · Not a loan app. Kolekt never lends, holds or moves money.</p>
       </main>
       <BottomNav current="settings" />
     </div>
@@ -168,10 +175,12 @@ export function Settings() {
 }
 
 const free = ['Unlimited customers and debts', 'WhatsApp reminders in English and Pidgin', 'Your payment link in every reminder', 'Receipt images to share', 'Customer trust score', 'Works offline, installs like an app', 'Backup and Excel export']
-const pro = ['Cloud backup and use on 2 phones', 'Your logo on receipts', 'Remove "sent with Kolekt"', 'Monthly sales and debt report', 'Staff access']
+const pro = ['Cloud backup and use on 2 phones', 'Your logo on receipts', 'Remove "sent with Kolekt"', 'Monthly report (coming later)', 'Staff access (coming later)']
 
 export function Plans() {
   const p = config.prices
+  const cloud = useCloud()
+  const active = isProActive(cloud)
   const join = config.founderWhatsApp ? `https://wa.me/${config.founderWhatsApp}?text=${encodeURIComponent('Hi! I want early access to Kolekt Pro 🙌')}` : ''
   return (
     <div className="screen">
@@ -203,7 +212,11 @@ export function Plans() {
             ))}
           </ul>
           <p className="small">Comparable apps listed ₦2,500–₦3,000 a month in October 2026. Prepaid plans, no auto-renew. See the <a href="#/refunds">refund policy</a>.</p>
-          {config.proPayLink ? (
+          {active ? (
+            <p className="small">
+              <b>Your Pro is active until {cloud.proUntil}.</b> Thank you!
+            </p>
+          ) : config.proPayLink ? (
             <a className="btn" href={config.proPayLink} target="_blank" rel="noreferrer">
               Get Pro
             </a>
