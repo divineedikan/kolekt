@@ -66,7 +66,7 @@ export function Home() {
         {!settings.payLink && (
           <button className="tip" onClick={() => go({ name: 'settings' })}>
             <b>🛡️ Stop fake transfer alerts</b>
-            <span>Add your own Paystack link. Customers pay you directly and Paystack confirms it. Tap to set up.</span>
+            <span>Add your own payment link (Paystack, Flutterwave, Squad or Monnify). Customers pay you directly and the provider confirms it. Tap to set up.</span>
           </button>
         )}
 

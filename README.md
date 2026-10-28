@@ -2,14 +2,14 @@
 
 Know who owes you. Get paid faster. A phone-first web app (PWA) for Nigerian WhatsApp and Instagram sellers who sell on credit.
 
-Not a loan app: Kolekt never lends, holds or moves money. Payments go straight to the seller's own Paystack link.
+Not a loan app: Kolekt never lends, holds or moves money. Payments go straight to the seller's own payment link or bank account.
 
 ## Features (v0.1, all free)
 
 - Record a credit sale in ~10 seconds, with part-payment and quick due dates (Friday, 1 week, month end)
 - Home dashboard: total owed, overdue, collected this month, "Chase today" list
 - One-tap WhatsApp reminders (wa.me, so no API cost) in English or Pidgin, Friendly / Firm / Final tone picked automatically by lateness
-- Seller's own Paystack payment link in every reminder, plus a "verify before releasing goods" tip against fake alerts
+- Seller's own payment link (Paystack, Flutterwave, Squad, Monnify...) in every reminder, plus a "verify before releasing goods" tip against fake alerts
 - Shareable receipt / balance-notice image
 - Customer trust score (pays on time / sometimes late / often late)
 - Customer statement over WhatsApp, call button, pick customer from phone contacts (Android Chrome)

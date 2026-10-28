@@ -47,7 +47,7 @@ export function RemindSheet({ debt, onClose }: { debt: Debt | null; onClose: () 
       </div>
       <div className="bubble">{text}</div>
       {!settings.payLink && !settings.bankDetails && (
-        <p className="hint">💡 Add your Paystack link in More → Payment so customers can pay in one tap.</p>
+        <p className="hint">💡 Add your payment link in More → Payment so customers can pay in one tap.</p>
       )}
       <button className="btn wa" onClick={send}>
         Send on WhatsApp

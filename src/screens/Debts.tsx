@@ -63,7 +63,7 @@ export function Debts({ filter = 'open' }: { filter?: string }) {
 }
 
 const methods: { key: Payment['method']; label: string }[] = [
-  { key: 'paystack', label: 'Paystack' },
+  { key: 'paystack', label: 'Pay link' },
   { key: 'transfer', label: 'Transfer' },
   { key: 'cash', label: 'Cash' },
   { key: 'pos', label: 'POS' },
@@ -151,7 +151,7 @@ export function DebtDetail({ id }: { id: string }) {
         </div>
 
         {settings.payLink && bal > 0 && (
-          <p className="hint">🛡️ Before releasing goods, confirm Paystack payments in your Paystack app. Never trust a screenshot alone.</p>
+          <p className="hint">🛡️ Before releasing goods, confirm the payment in your payment or bank app. Never trust a screenshot alone.</p>
         )}
 
         <h2 className="section">History</h2>
@@ -215,7 +215,7 @@ export function DebtDetail({ id }: { id: string }) {
           <p className="warn-box">⚠️ Open your bank app and confirm the money landed before you mark it paid. Fake alerts and edited receipt screenshots are common.</p>
         )}
         {method === 'paystack' && (
-          <p className="hint">🛡️ Confirm it in your Paystack app or email first. A screenshot is not proof.</p>
+          <p className="hint">🛡️ Confirm it in your payment app (Paystack, Flutterwave, Squad…) or email first. A screenshot is not proof.</p>
         )}
         <button className="btn" onClick={savePayment}>
           {method === 'transfer' || method === 'paystack' ? "I've confirmed — save payment" : 'Save payment'}

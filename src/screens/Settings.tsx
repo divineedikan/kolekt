@@ -109,11 +109,11 @@ export function Settings() {
 
         <h2 className="section">Payment</h2>
         <Field
-          label="Your Paystack payment link"
+          label="Your payment link"
           k="payLink"
           type="url"
-          placeholder="https://paystack.shop/pay/your-shop"
-          hint="Create a free Payment Page in your Paystack dashboard and paste the link. Money goes straight to you; Kolekt never touches it."
+          placeholder="https://flutterwave.com/pay/your-shop"
+          hint="Any provider works: Paystack Payment Page, Flutterwave Payment Link, Squad, Monnify or Selar. Create a free link there and paste it. Money goes straight to you; Kolekt never touches it."
         />
         <Field label="Or bank details (fallback)" k="bankDetails" placeholder="0123456789 · GTBank · Ada Obi" />
 
@@ -156,7 +156,7 @@ export function Settings() {
   )
 }
 
-const free = ['Unlimited customers and debts', 'WhatsApp reminders in English and Pidgin', 'Paystack pay links (no fake alerts)', 'Receipt images to share', 'Customer trust score', 'Works offline, installs like an app', 'Backup and Excel export']
+const free = ['Unlimited customers and debts', 'WhatsApp reminders in English and Pidgin', 'Payment links that confirm real payments (no fake alerts)', 'Receipt images to share', 'Customer trust score', 'Works offline, installs like an app', 'Backup and Excel export']
 const pro = ['Cloud backup and use on 2 phones', 'Your logo on receipts', 'Remove "sent with Kolekt"', 'Monthly sales and debt report', 'Staff access']
 
 export function Plans() {
@@ -237,8 +237,8 @@ export function Onboarding() {
           <h2>Set up your shop</h2>
           <label>Business name</label>
           <input className="input" placeholder="e.g. Ada's Closet" value={biz} onChange={(e) => setBiz(e.target.value)} autoFocus />
-          <label>Paystack payment link (optional)</label>
-          <input className="input" type="url" placeholder="https://paystack.shop/pay/..." value={link} onChange={(e) => setLink(e.target.value)} />
+          <label>Payment link (optional): Paystack, Flutterwave, Squad…</label>
+          <input className="input" type="url" placeholder="https://..." value={link} onChange={(e) => setLink(e.target.value)} />
           <p className="muted tiny">You can add this later in More → Payment.</p>
           <button
             className="btn"
@@ -266,7 +266,7 @@ export function Privacy() {
         <h3>What is stored</h3>
         <p>Your business name, payment link, customers' names and phone numbers, and the sales and payments you record. All of it is saved in this browser on your device only.</p>
         <h3>What leaves your phone</h3>
-        <p>Only what you choose to send: when you tap "Send on WhatsApp" or share a receipt, the message goes through WhatsApp or the app you pick. Payments go straight from your customer to your own Paystack account. Kolekt never holds money.</p>
+        <p>Only what you choose to send: when you tap "Send on WhatsApp" or share a receipt, the message goes through WhatsApp or the app you pick. Payments go straight from your customer to your own payment provider or bank account. Kolekt never holds money.</p>
         <h3>Your customers</h3>
         <p>You are responsible for having your customers' permission to message them about what they owe. Kolekt never messages anyone by itself and never contacts a customer's friends or contacts.</p>
         <h3>Deleting data</h3>
